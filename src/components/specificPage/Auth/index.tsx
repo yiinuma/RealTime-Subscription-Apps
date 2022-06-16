@@ -15,7 +15,6 @@ import {
 import { supabase } from 'utils/supabase'
 import { useForm, yupResolver } from '@mantine/form'
 
-import { Layout } from 'components/uiParts/Layout'
 import { Form } from 'types'
 
 const scheme = Yup.object().shape({
@@ -24,8 +23,8 @@ const scheme = Yup.object().shape({
     .required('No password provided.')
     .min(6, 'Password should be min 6 chars')
     .matches(/[a-z]+/, 'One lowercase char missing')
-    .matches(/[A-Z]+/, 'One uppercase char missing')
-    .matches(/[@$!%*#?&]+/, 'One special char missing'),
+    .matches(/[A-Z]+/, 'One uppercase char missing'),
+  // .matches(/[@$!%*#?&]+/, 'One special char missing'),
   age: Yup.number().min(15, 'Only over 15 for new account'),
 })
 
@@ -63,64 +62,62 @@ export const Auth = () => {
   }
 
   return (
-    <Layout title='Auth'>
-      <Box mx='auto' className='border-1 w-full max-w-md rounded-xl bg-white px-8 py-8 shadow-lg'>
-        <Center>
-          <AiOutlineSafety className='h-12 w-12 text-blue-500' />
-        </Center>
-        {error && (
-          <Alert
+    <Box>
+      <Center>
+        <AiOutlineSafety className='h-12 w-12 text-blue-500' />
+      </Center>
+      {error && (
+        <Alert
+          mt='md'
+          icon={<AiOutlineExclamationCircle className='text-pink-500' />}
+          title='Authorization Error'
+          color='red'
+          radius='md'
+        >
+          {error}
+        </Alert>
+      )}
+      <form onSubmit={form.onSubmit(handleSubmit)}>
+        <TextInput
+          mt='md'
+          id='email'
+          label='Email'
+          placeholder='exsample@gmail.com'
+          {...form.getInputProps('email')}
+        />
+        <PasswordInput
+          mt='md'
+          id='password'
+          placeholder='password'
+          label='Password'
+          description='Must include one upper & lower char'
+          {...form.getInputProps('password')}
+        />
+        {isRegister && (
+          <NumberInput
             mt='md'
-            icon={<AiOutlineExclamationCircle className='text-pink-500' />}
-            title='Authorization Error'
-            color='red'
-            radius='md'
-          >
-            {error}
-          </Alert>
+            id='age'
+            label='Age'
+            placeholder='Your age'
+            {...form.getInputProps('age')}
+          />
         )}
-        <form onSubmit={form.onSubmit(handleSubmit)}>
-          <TextInput
-            mt='md'
-            id='email'
-            label='Email'
-            placeholder='exsample@gmail.com'
-            {...form.getInputProps('email')}
-          />
-          <PasswordInput
-            mt='md'
-            id='password'
-            placeholder='password'
-            label='Password'
-            description='Must include one upper + lower char & special char'
-            {...form.getInputProps('password')}
-          />
-          {isRegister && (
-            <NumberInput
-              mt='md'
-              id='age'
-              label='Age'
-              placeholder='Your age'
-              {...form.getInputProps('age')}
-            />
-          )}
-          <Group mt='lg' position='apart'>
-            <Anchor
-              component='button'
-              type='button'
-              color='gray'
-              onClick={() => {
-                setIsRegister(!isRegister)
-                setError('')
-              }}
-              size='sm'
-            >
-              {isRegister ? 'Have an account? Login' : "Don't have an account? Register"}
-            </Anchor>
-            <Button type='submit'>{isRegister ? 'Register' : 'Login'}</Button>
-          </Group>
-        </form>
-      </Box>
-    </Layout>
+        <Group mt='lg' position='apart'>
+          <Anchor
+            component='button'
+            type='button'
+            color='gray'
+            onClick={() => {
+              setIsRegister(!isRegister)
+              setError('')
+            }}
+            size='sm'
+          >
+            {isRegister ? 'Have an account? Login' : "Don't have an account? Register"}
+          </Anchor>
+          <Button type='submit'>{isRegister ? 'Register' : 'Login'}</Button>
+        </Group>
+      </form>
+    </Box>
   )
 }

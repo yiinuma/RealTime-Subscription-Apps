@@ -1,9 +1,11 @@
 import type { NextPage } from 'next'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { supabase } from '../utils/supabase'
 import useStore from 'store'
 import { Auth } from 'components/specificPage/Auth'
+import { Button, Group, Modal } from '@mantine/core'
+import Header from 'components/specificPage/Header'
 
 const Home: NextPage = () => {
   const session = useStore((state) => state.session)
@@ -16,7 +18,7 @@ const Home: NextPage = () => {
   }, [setSession])
   return (
     <>
-      <Auth />
+      <Header />
     </>
   )
 }

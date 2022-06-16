@@ -4,6 +4,7 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 import { MantineProvider } from '@mantine/core'
 
 import '../styles/globals.css'
+import Head from 'next/head'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,6 +18,9 @@ const queryClient = new QueryClient({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
+      <Head>
+        <title>Realtime subscription App</title>
+      </Head>
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS
