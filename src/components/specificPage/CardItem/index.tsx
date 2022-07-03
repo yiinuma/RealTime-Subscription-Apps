@@ -1,4 +1,5 @@
-import { Card, Image, Text, Badge, Button, Group, useMantineTheme, Grid } from '@mantine/core'
+import { Text, Badge, Group, useMantineTheme } from '@mantine/core'
+import Image from 'next/image'
 
 const CardItem = () => {
   const theme = useMantineTheme()
@@ -6,32 +7,29 @@ const CardItem = () => {
   const secondaryColor = theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[7]
 
   return (
-    // <Grid.Col span={4}>
-    <>
-      <Card className='min-h-[320px]' shadow='sm' p='lg'>
-        <Card.Section>
-          <Image src='/vercel.svg' height={180} fit='contain' alt='Norway' />
-        </Card.Section>
+    <a
+      className='cursor-pointer overflow-hidden text-gray-600 no-underline duration-200 ease-in-out hover:scale-[102%] '
+      href='https://www.yahoo.co.jp/'
+    >
+      <div className='rounded-lg bg-white p-[4%] md:min-h-[400px]'>
+        <div className='mx-[-4%] mt-[-4%]'>
+          <Image
+            className='rounded-t-lg'
+            src='https://picsum.photos/768/768'
+            width={768}
+            height={768}
+            objectFit='contain'
+          />
+        </div>
 
-        <Group position='apart' style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
-          <Text weight={500}>Norway Fjord Adventures</Text>
-          <Badge color='pink' variant='light'>
-            On Sale
-          </Badge>
-        </Group>
+        <h2 className='text-lg'>Norway Fjord Adventures</h2>
 
-        <Text size='sm' style={{ color: secondaryColor, lineHeight: 1.5 }}>
+        <p className='line-clamp-3'>
           With Fjord Tours you can explore more of the magical fjord landscapes with tours and
           activities on and around the fjords of Norway
-        </Text>
-
-        <Button variant='light' color='blue' fullWidth style={{ marginTop: 14 }}>
-          Book classic tour now
-        </Button>
-      </Card>
-    </>
-
-    // </Grid.Col>
+        </p>
+      </div>
+    </a>
   )
 }
 
