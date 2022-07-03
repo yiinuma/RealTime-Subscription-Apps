@@ -7,7 +7,7 @@ const Header = () => {
   const [opened, setOpened] = useState(false)
 
   return (
-    <header className='bg-white'>
+    <header className='sticky top-0 z-50 bg-white'>
       <Modal
         size='md'
         opened={opened}
@@ -16,7 +16,7 @@ const Header = () => {
       >
         <Auth />
       </Modal>
-      <Container className='sticky top-0 flex items-center justify-between py-3'>
+      <Container className='flex items-center justify-between py-3'>
         <Title order={1} className='text-xl md:text-2xl'>
           Realtime Subscription
         </Title>
