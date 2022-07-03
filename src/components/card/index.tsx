@@ -6,7 +6,8 @@ const CardItem = () => {
   const secondaryColor = theme.colorScheme === 'dark' ? theme.colors.dark[1] : theme.colors.gray[7]
 
   return (
-    <Grid.Col span={4}>
+    // <Grid.Col span={4}>
+    <>
       <Card className='min-h-[320px]' shadow='sm' p='lg'>
         <Card.Section>
           <Image src='/vercel.svg' height={180} fit='contain' alt='Norway' />
@@ -28,7 +29,9 @@ const CardItem = () => {
           Book classic tour now
         </Button>
       </Card>
-    </Grid.Col>
+    </>
+
+    // </Grid.Col>
   )
 }
 

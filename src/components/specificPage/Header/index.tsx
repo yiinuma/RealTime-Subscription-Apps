@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Center, Container, Group, Modal, Text, Title } from '@mantine/core'
+import { Button, Modal } from '@mantine/core'
 
 import { Auth } from 'components/specificPage/Auth'
 
@@ -16,14 +16,12 @@ const Header = () => {
       >
         <Auth />
       </Modal>
-      <Container className='flex items-center justify-between py-3'>
-        <Title order={1} className='text-xl md:text-2xl'>
-          Realtime Subscription
-        </Title>
+      <div className='container mx-auto flex items-center justify-between py-3 px-2'>
+        <h1 className='text-xl md:text-2xl'>Realtime Subscription</h1>
         <Button className='' variant='outline' onClick={() => setOpened(true)}>
           New Post
         </Button>
-      </Container>
+      </div>
     </header>
   )
 }

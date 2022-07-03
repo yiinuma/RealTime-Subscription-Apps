@@ -21,14 +21,15 @@ const Home: NextPage = () => {
   return (
     <div className='flex min-h-screen flex-col bg-slate-50 font-sans'>
       <Header />
-      <main className='flex-cols flex flex-1'>
-        <Container className='py-4'>
-          <Grid>
+      <main className='flex-cols flex flex-1 px-2 md:px-0'>
+        <div className='container mx-auto py-4'>
+          <div className='grid gap-4 md:grid-cols-3 xl:grid-cols-4'>
             <CardItem />
             <CardItem />
             <CardItem />
-          </Grid>
-        </Container>
+            <CardItem />
+          </div>
+        </div>
       </main>
       <Footer />
     </div>

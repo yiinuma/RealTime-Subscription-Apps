@@ -1,11 +1,11 @@
 import React from 'react'
-import { Container, Group, ActionIcon, Text, Image } from '@mantine/core'
+import { Group, ActionIcon, Text, Image } from '@mantine/core'
 import { AiOutlineTwitter } from 'react-icons/ai'
 
 const Footer = () => {
   return (
     <footer className='sticky bottom-0 z-50 bg-white'>
-      <Container className='flex items-center justify-between py-3'>
+      <div className='container mx-auto flex items-center justify-between py-3 px-2'>
         <Group>
           <div className='w-8'>
             <Image radius='xl' src='logo.jpg' />
@@ -21,7 +21,7 @@ const Footer = () => {
         >
           <AiOutlineTwitter className='h-6 w-6' />
         </ActionIcon>
-      </Container>
+      </div>
     </footer>
   )
 }
