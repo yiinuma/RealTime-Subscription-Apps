@@ -6,6 +6,7 @@ import useStore from 'store'
 import { Auth } from 'components/specificPage/Auth'
 import { Button, Group, Modal } from '@mantine/core'
 import Header from 'components/specificPage/Header'
+import Footer from 'components/specificPage/Footer'
 
 const Home: NextPage = () => {
   const session = useStore((state) => state.session)
@@ -17,9 +18,11 @@ const Home: NextPage = () => {
     })
   }, [setSession])
   return (
-    <>
+    <div className='flex min-h-screen flex-col bg-slate-50 font-sans'>
       <Header />
-    </>
+      <main className='flex-cols flex flex-1'>main</main>
+      <Footer />
+    </div>
   )
 }
 
