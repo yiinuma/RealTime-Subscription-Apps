@@ -10,7 +10,7 @@ export default class _Document extends Document {
     return (
       <Html>
         <Head />
-        <body className='flex flex-1 flex-col justify-center py-4'>
+        <body className=''>
           <Main />
           <NextScript />
         </body>

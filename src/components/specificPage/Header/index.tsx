@@ -7,7 +7,7 @@ const Header = () => {
   const [opened, setOpened] = useState(false)
 
   return (
-    <>
+    <header className='bg-white'>
       <Modal
         size='md'
         opened={opened}
@@ -16,19 +16,15 @@ const Header = () => {
       >
         <Auth />
       </Modal>
-      <Group className='relative ml-4 h-[34px] md:ml-0 md:flex md:justify-center'>
+      <Container className='sticky top-0 flex items-center justify-between py-3'>
         <Title order={1} className='text-xl md:text-2xl'>
           Realtime Subscription
         </Title>
-        <Button
-          className='absolute top-0 right-2 md:right-8'
-          variant='outline'
-          onClick={() => setOpened(true)}
-        >
+        <Button className='' variant='outline' onClick={() => setOpened(true)}>
           New Post
         </Button>
-      </Group>
-    </>
+      </Container>
+    </header>
   )
 }
 
