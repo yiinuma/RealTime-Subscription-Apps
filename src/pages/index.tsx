@@ -5,9 +5,9 @@ import { supabase } from '../utils/supabase'
 import useStore from 'store'
 import { Auth } from 'components/specificPage/Auth'
 import { Button, Container, Grid, Group, Modal } from '@mantine/core'
-import Header from 'components/specificPage/Header'
-import Footer from 'components/specificPage/Footer'
-import CardItem from 'components/card'
+import Header from 'components/uiParts/Header'
+import Footer from 'components/uiParts/Footer'
+import CardItem from 'components/specificPage/CardItem'
 
 const Home: NextPage = () => {
   const session = useStore((state) => state.session)
