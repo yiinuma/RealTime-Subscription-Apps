@@ -21,7 +21,7 @@ const Home: NextPage = () => {
   return (
     <div className='flex min-h-screen flex-col bg-slate-50 font-sans'>
       <Header />
-      <main className='flex-cols flex flex-1 px-4 md:px-0'>
+      <main className='flex flex-1 flex-col px-4 md:px-0'>
         <div className='container mx-auto py-4  md:px-24'>
           <div className='grid gap-4 md:grid-cols-3 xl:grid-cols-4'>
             <CardItem />

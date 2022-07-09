@@ -11,7 +11,7 @@ const CardItem = () => {
         <div className='w-100'>
           <Image
             className='rounded-t-lg'
-            src='https://picsum.photos/768/768'
+            src='https://picsum.photos/168/1000'
             width={768}
             height={768}
             objectFit='cover'

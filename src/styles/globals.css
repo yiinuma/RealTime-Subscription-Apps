@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.nextImageContainer > span {
+  position: static !important;
+}
+
+.nextImage {
+  position: static !important;
+  width: 100% !important;
+  height: auto !important;
+  max-height: calc(100vh - 64px) !important;
+  padding: 4% 4% !important;
+}
