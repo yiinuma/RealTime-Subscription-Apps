@@ -8,7 +8,7 @@ const Footer = () => {
       <div className='container mx-auto flex items-center justify-between py-3 px-2'>
         <Group>
           <div className='w-8'>
-            <Image radius='xl' src='logo.jpg' />
+            <Image radius='xl' src='/logo.jpg' />
           </div>
           <Text>Subscription Test Page</Text>
         </Group>

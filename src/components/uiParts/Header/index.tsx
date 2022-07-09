@@ -16,7 +16,7 @@ const Header = () => {
       >
         <Auth />
       </Modal>
-      <div className='container mx-auto flex items-center justify-between py-3 px-2'>
+      <div className='container mx-auto flex items-center justify-between py-1 px-3'>
         <h1 className='text-xl md:text-2xl'>Realtime Subscription</h1>
         <Button className='' variant='outline' onClick={() => setOpened(true)}>
           New Post
