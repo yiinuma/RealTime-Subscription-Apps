@@ -1,13 +1,15 @@
+import { useQueryClient } from 'react-query'
+import Link from 'next/link'
 import { Button, Modal } from '@mantine/core'
 
 import { Auth } from 'components/specificPage/Auth'
-import Link from 'next/link'
 import useStore from 'store'
 import { supabase } from 'utils/supabase'
 
 const Header = () => {
+  const queryClient = useQueryClient()
+  const resetPost = useStore((state) => state.resetEditedPost)
   const session = useStore((state) => state.session)
-  // const [opened, setOpened] = useState(false)
   const opened = useStore((state) => state.opened)
   const setOpened = useStore((state) => state.setOpened)
 
@@ -36,7 +38,10 @@ const Header = () => {
             style={{ outlineWidth: 0 }}
             variant='light'
             color='red'
-            onClick={() => supabase.auth.signOut()}
+            onClick={() => {
+              supabase.auth.signOut()
+              resetPost()
+            }}
           >
             Logout
           </Button>

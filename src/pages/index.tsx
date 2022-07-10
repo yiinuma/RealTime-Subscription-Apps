@@ -2,8 +2,13 @@ import type { NextPage } from 'next'
 import Header from 'components/uiParts/Header'
 import Footer from 'components/uiParts/Footer'
 import CardItem from 'components/specificPage/CardItem'
+import { useQueryPosts } from 'hooks/useQueryPosts'
+import { useSubscribePosts } from 'hooks/useSubscribePosts'
 
 const Home: NextPage = () => {
+  const { data: posts } = useQueryPosts()
+  useSubscribePosts()
+
   return (
     <div className='flex min-h-screen flex-col bg-slate-50 font-sans'>
       <Header />
