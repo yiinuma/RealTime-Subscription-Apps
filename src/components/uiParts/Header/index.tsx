@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Button, Modal } from '@mantine/core'
 
 import { Auth } from 'components/specificPage/Auth'
@@ -8,7 +7,9 @@ import { supabase } from 'utils/supabase'
 
 const Header = () => {
   const session = useStore((state) => state.session)
-  const [opened, setOpened] = useState(false)
+  // const [opened, setOpened] = useState(false)
+  const opened = useStore((state) => state.opened)
+  const setOpened = useStore((state) => state.setOpened)
 
   return (
     <header className='sticky top-0 z-50 bg-white'>
@@ -27,13 +28,13 @@ const Header = () => {
           </a>
         </Link>
         {!session ? (
-          <Button className='' variant='outline' onClick={() => setOpened(true)}>
+          <Button style={{ outlineWidth: 0 }} variant='light' onClick={() => setOpened(true)}>
             New Post
           </Button>
         ) : (
           <Button
-            className=''
-            variant='outline'
+            style={{ outlineWidth: 0 }}
+            variant='light'
             color='red'
             onClick={() => supabase.auth.signOut()}
           >
