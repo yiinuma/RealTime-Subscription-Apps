@@ -9,10 +9,12 @@ export type Post = {
   user_id: string | undefined
   title: string
   post_url: string
+  description: string
 }
 
 export type EditedPost = {
   id: string
   title: string
   post_url: string
+  description: string
 }

@@ -25,6 +25,7 @@ export const useSubscribePosts = () => {
               title: payload.new.title,
               post_url: payload.new.post_url,
               user_id: payload.new.user_id,
+              description: payload.new.description,
             },
           ],
         )
@@ -44,6 +45,7 @@ export const useSubscribePosts = () => {
                   title: payload.new.title,
                   post_url: payload.new.post_url,
                   user_id: payload.new.user_id,
+                  description: payload.new.description,
                 }
               : post,
           ),

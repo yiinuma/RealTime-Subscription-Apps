@@ -16,15 +16,16 @@ const useStore = create<State>((set) => ({
   setSession: (payload) => set({ session: payload }),
   opened: false,
   setOpened: (state) => set({ opened: state }),
-  editedPost: { id: '', title: '', post_url: '' },
+  editedPost: { id: '', title: '', post_url: '', description: '' },
   updateEditedPost: (payload) =>
     set({
       editedPost: {
         id: payload.id,
         title: payload.title,
         post_url: payload.post_url,
+        description: payload.description,
       },
     }),
-  resetEditedPost: () => set({ editedPost: { id: '', title: '', post_url: '' } }),
+  resetEditedPost: () => set({ editedPost: { id: '', title: '', post_url: '', description: '' } }),
 }))
 export default useStore

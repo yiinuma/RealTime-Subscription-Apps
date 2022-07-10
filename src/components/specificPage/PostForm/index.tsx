@@ -1,5 +1,6 @@
-import { FormEvent, FC, memo } from 'react'
+import React, { FormEvent, FC, memo } from 'react'
 import Image from 'next/image'
+import { Input } from '@mantine/core'
 import { AiFillCamera } from 'react-icons/ai'
 
 import useStore from 'store'
@@ -22,6 +23,7 @@ export const PostFormMemo: FC = () => {
         user_id: session?.user?.id,
         title: editedPost.title,
         post_url: editedPost.post_url,
+        description: editedPost.description,
       })
       setFullUrl('')
     } else {
@@ -29,19 +31,42 @@ export const PostFormMemo: FC = () => {
         id: editedPost.id,
         title: editedPost.title,
         post_url: editedPost.post_url,
+        description: editedPost.description,
       })
       setFullUrl('')
     }
   }
   return (
     <form onSubmit={submitHandler}>
-      <input
-        type='text'
-        className='my-1 rounded border border-gray-300 px-3 py-2 text-sm focus:outline-none'
-        placeholder='New post ?'
+      <Input
+        placeholder='New post title?'
         value={editedPost.title}
-        onChange={(e) => update({ ...editedPost, title: e.target.value })}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          update({ ...editedPost, title: e.target.value })
+        }
       />
+      <Input
+        className='mt-2'
+        placeholder='description?'
+        value={editedPost.description}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          update({ ...editedPost, description: e.target.value })
+        }
+      />
+
+      <div className='flex justify-center'>
+        {postUrl && (
+          <Image
+            src={postUrl}
+            alt='Image'
+            className='rounded'
+            width={150}
+            height={150}
+            objectFit='contain'
+          />
+        )}
+      </div>
+
       <div className='my-3 flex justify-center'>
         <button
           data-testid='btn-post'
@@ -53,11 +78,6 @@ export const PostFormMemo: FC = () => {
         >
           {editedPost.id ? 'Update' : 'Create'}
         </button>
-      </div>
-      <div className='flex justify-center'>
-        {postUrl && (
-          <Image src={postUrl} alt='Image' className='rounded' width={150} height={150} />
-        )}
       </div>
       <div className='flex justify-center'>{useMutateUploadPostImg.isLoading && <Spinner />}</div>
       <div className='flex justify-center'>

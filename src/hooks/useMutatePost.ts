@@ -26,7 +26,7 @@ export const useMutatePost = () => {
     async (post: EditedPost) => {
       const { data, error } = await supabase
         .from('posts')
-        .update({ title: post.title, post_url: post.post_url })
+        .update({ title: post.title, post_url: post.post_url, description: post.description })
         .eq('id', post.id)
       if (error) throw new Error(error.message)
       return data
