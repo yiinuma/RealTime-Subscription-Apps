@@ -3,34 +3,16 @@ export type Form = {
   password: string
   age: number
 }
-export type Todo = {
-  id: number
-  created_at: string
-  title: string
-}
-export type AuthForm = {
-  firstName: string
-  lastName: string
-  email: string
-  password: string
-  confirmPassword: string
-  termsOfService: boolean
-}
 export type Post = {
-  id: number
+  id: string
   created_at: string
+  user_id: string | undefined
   title: string
-  content: string
   post_url: string
-  status: string
 }
-export type Performance = {
-  id: number
-  created_at: string
-  efficiency: number
-  comfort: number
-  luck: number
-  durability: number
-  user_id: string
-  level: number
+
+export type EditedPost = {
+  id: string
+  title: string
+  post_url: string
 }

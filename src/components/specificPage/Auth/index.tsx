@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as Yup from 'yup'
 import { AiOutlineSafety, AiOutlineExclamationCircle } from 'react-icons/ai'
 import {
@@ -16,6 +16,7 @@ import { supabase } from 'utils/supabase'
 import { useForm, yupResolver } from '@mantine/form'
 
 import { Form } from 'types'
+import useStore from 'store'
 
 const scheme = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('No email provided.'),
@@ -29,7 +30,8 @@ const scheme = Yup.object().shape({
 })
 
 export const Auth = () => {
-  const [isRegister, setIsRegister] = useState(false)
+  const setSession = useStore((state) => state.setSession)
+  const [isLogin, setIsLogin] = useState(true)
   const [error, setError] = useState('')
   const form = useForm<Form>({
     schema: yupResolver(scheme),
@@ -39,9 +41,23 @@ export const Auth = () => {
       age: 15,
     },
   })
+
+  useEffect(() => {
+    // アクティブなセッションがある場合そのセッションデータが返ってくる
+    setSession(supabase.auth.session())
+
+    // 認証イベントが発生するたびに通知を受け取ります。
+    supabase.auth.onAuthStateChange((_event, session) => {
+      // _event: SIGNED_IN, SIGNED_OUT
+      // session: セッション情報
+      setSession(session)
+      console.log(_event)
+    })
+  }, [setSession])
+
   const handleSubmit = async () => {
-    if (isRegister) {
-      const { error } = await supabase.auth.signUp({
+    if (isLogin) {
+      const { error } = await supabase.auth.signIn({
         email: form.values.email,
         password: form.values.password,
       })
@@ -50,7 +66,7 @@ export const Auth = () => {
       }
       form.reset()
     } else {
-      const { error } = await supabase.auth.signIn({
+      const { error } = await supabase.auth.signUp({
         email: form.values.email,
         password: form.values.password,
       })
@@ -93,7 +109,7 @@ export const Auth = () => {
           description='Must include one upper & lower char'
           {...form.getInputProps('password')}
         />
-        {isRegister && (
+        {!isLogin && (
           <NumberInput
             mt='md'
             id='age'
@@ -108,14 +124,14 @@ export const Auth = () => {
             type='button'
             color='gray'
             onClick={() => {
-              setIsRegister(!isRegister)
+              setIsLogin(!isLogin)
               setError('')
             }}
             size='sm'
           >
-            {isRegister ? 'Have an account? Login' : "Don't have an account? Register"}
+            {isLogin ? 'Have an account? Login' : "Don't have an account? Register"}
           </Anchor>
-          <Button type='submit'>{isRegister ? 'Register' : 'Login'}</Button>
+          <Button type='submit'>{isLogin ? 'Login' : 'Register'}</Button>
         </Group>
       </form>
     </Box>

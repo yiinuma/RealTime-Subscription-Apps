@@ -3,8 +3,11 @@ import { Button, Modal } from '@mantine/core'
 
 import { Auth } from 'components/specificPage/Auth'
 import Link from 'next/link'
+import useStore from 'store'
+import { supabase } from 'utils/supabase'
 
 const Header = () => {
+  const session = useStore((state) => state.session)
   const [opened, setOpened] = useState(false)
 
   return (
@@ -23,9 +26,20 @@ const Header = () => {
             <h1 className='text-xl md:text-2xl'>Realtime Subscription</h1>
           </a>
         </Link>
-        <Button className='' variant='outline' onClick={() => setOpened(true)}>
-          New Post
-        </Button>
+        {!session ? (
+          <Button className='' variant='outline' onClick={() => setOpened(true)}>
+            New Post
+          </Button>
+        ) : (
+          <Button
+            className=''
+            variant='outline'
+            color='red'
+            onClick={() => supabase.auth.signOut()}
+          >
+            Logout
+          </Button>
+        )}
       </div>
     </header>
   )
