@@ -55,7 +55,7 @@ export const PostFormMemo: FC = () => {
       />
 
       <div className='flex justify-center'>
-        {postUrl && (
+        {postUrl ? (
           <Image
             src={postUrl}
             alt='Image'
@@ -64,22 +64,11 @@ export const PostFormMemo: FC = () => {
             height={150}
             objectFit='contain'
           />
+        ) : (
+          <p>added image</p>
         )}
       </div>
 
-      <div className='my-3 flex justify-center'>
-        <button
-          data-testid='btn-post'
-          type='submit'
-          className={`rounded ${
-            useMutateUploadPostImg.isLoading || !editedPost.title ? 'bg-gray-300' : 'bg-indigo-600'
-          }  px-3 py-2 text-sm text-white`}
-          disabled={useMutateUploadPostImg.isLoading || !editedPost.title}
-        >
-          {editedPost.id ? 'Update' : 'Create'}
-        </button>
-      </div>
-      <div className='flex justify-center'>{useMutateUploadPostImg.isLoading && <Spinner />}</div>
       <div className='flex justify-center'>
         <label htmlFor='post'>
           <AiFillCamera className='mt-2 h-7 w-7 cursor-pointer text-gray-500' />
@@ -95,6 +84,20 @@ export const PostFormMemo: FC = () => {
           }}
         />
       </div>
+
+      <div className='my-3 flex justify-center'>
+        <button
+          data-testid='btn-post'
+          type='submit'
+          className={`rounded ${
+            useMutateUploadPostImg.isLoading || !editedPost.title ? 'bg-gray-300' : 'bg-indigo-600'
+          }  px-3 py-2 text-sm text-white`}
+          disabled={useMutateUploadPostImg.isLoading || !editedPost.title}
+        >
+          {editedPost.id ? 'Update' : 'Create'}
+        </button>
+      </div>
+      <div className='flex justify-center'>{useMutateUploadPostImg.isLoading && <Spinner />}</div>
     </form>
   )
 }

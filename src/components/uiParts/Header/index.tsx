@@ -7,7 +7,6 @@ import useStore from 'store'
 import { supabase } from 'utils/supabase'
 
 const Header = () => {
-  const queryClient = useQueryClient()
   const resetPost = useStore((state) => state.resetEditedPost)
   const session = useStore((state) => state.session)
   const opened = useStore((state) => state.opened)
