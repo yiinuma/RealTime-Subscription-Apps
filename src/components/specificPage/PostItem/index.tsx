@@ -9,9 +9,9 @@ import Link from 'next/link'
 const PostItemMemo: FC<Omit<Post, 'created_at'>> = ({ id, title, post_url, description }) => {
   const { fullUrl: postUrl, isLoading: isLoadingPost } = useDownloadUrl(post_url, 'posts')
   return (
-    <li className=' list-none'>
+    <li className='list-none duration-200 ease-in-out hover:scale-[102%] '>
       <Link href={`/detail-post/${id}`}>
-        <a className='cursor-pointer overflow-hidden text-gray-600 no-underline duration-200 ease-in-out hover:scale-[102%] '>
+        <a className='cursor-pointer overflow-hidden text-gray-600 no-underline '>
           <div className='rounded-lg bg-white md:min-h-[400px]'>
             <div className='w-100'>
               {postUrl && (
