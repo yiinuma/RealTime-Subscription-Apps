@@ -24,6 +24,7 @@ const DetailPost: FC = () => {
 
   if (typeof post === 'undefined') {
     router.back()
+    return null
   }
 
   const { fullUrl: postUrl, isLoading: isLoadingPost } = useDownloadUrl(post[0].post_url, 'posts')
@@ -36,9 +37,7 @@ const DetailPost: FC = () => {
           <div className='flex flex-col px-4 md:h-[calc(100vh-64px)] md:flex-row md:px-0'>
             <div className='flex items-center justify-center p-[2.5%] md:h-full md:w-2/3 '>
               <div className='nextImageContainer'>
-                {/* {postUrl && ( */}
-                {/* <Image className='nextImage' src={postUrl} layout='fill' objectFit='contain' /> */}
-                {/* )} */}
+                {postUrl && <img className='nextImage' src={postUrl} />}
               </div>
             </div>
             <div className='min-h-full border border-solid border-slate-200 bg-white px-4 py-3 md:w-1/3 '>
