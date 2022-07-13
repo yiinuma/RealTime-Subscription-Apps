@@ -1,14 +1,12 @@
-import Image from 'next/image'
 import { FC, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { Loader } from '@mantine/core'
 
 import { Post } from 'types'
 import { useQueryPosts } from 'hooks/useQueryPosts'
+import { useSubscribePosts } from 'hooks/useSubscribePosts'
 import { useDownloadUrl } from 'hooks/useDownloadUrl'
 import Header from 'components/uiParts/Header'
-import { Spinner } from 'components/uiParts/Spinner'
-import { Loader } from '@mantine/core'
-import { useSubscribePosts } from 'hooks/useSubscribePosts'
 
 const DetailPost: FC = () => {
   const [post, setPost] = useState<Post[] | null>(null)

@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import { FC, memo } from 'react'
+import { Loader } from '@mantine/core'
 
 import { Post } from 'types'
 import { useDownloadUrl } from 'hooks/useDownloadUrl'
-import { Spinner } from 'components/uiParts/Spinner'
 import Link from 'next/link'
 
 const PostItemMemo: FC<Omit<Post, 'created_at'>> = ({ id, title, post_url, description }) => {
@@ -25,7 +25,9 @@ const PostItemMemo: FC<Omit<Post, 'created_at'>> = ({ id, title, post_url, descr
                 />
               )}
             </div>
-            <div className='my-3 flex justify-center'>{isLoadingPost && <Spinner />}</div>
+            <div className='my-3 flex justify-center'>
+              {isLoadingPost && <Loader variant='bars' />}
+            </div>
 
             <div className='px-3 pb-2'>
               <h2 className='text-lg'>{title}</h2>
