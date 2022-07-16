@@ -1,4 +1,3 @@
-import { useQueryClient } from 'react-query'
 import Link from 'next/link'
 import { Button, Modal } from '@mantine/core'
 

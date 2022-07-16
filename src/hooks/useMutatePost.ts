@@ -1,10 +1,11 @@
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 
 import useStore from 'store'
 import { supabase } from 'utils/supabase'
 import { Post, EditedPost } from 'types'
 
 export const useMutatePost = () => {
+  const queryClient = useQueryClient()
   const reset = useStore((state) => state.resetEditedPost)
   const createPostMutation = useMutation(
     async (post: Omit<Post, 'id' | 'created_at'>) => {
@@ -13,7 +14,11 @@ export const useMutatePost = () => {
       return data
     },
     {
-      onSuccess: () => {
+      onSuccess: (res) => {
+        const previousPost = queryClient.getQueryData<Post[]>(['posts'])
+        if (previousPost) {
+          queryClient.setQueryData(['posts'], [...previousPost, res[0]])
+        }
         reset()
       },
       onError: (err: any) => {

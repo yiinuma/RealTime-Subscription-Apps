@@ -12,9 +12,4 @@ export type Post = {
   description: string
 }
 
-export type EditedPost = {
-  id: string
-  title: string
-  post_url: string
-  description: string
-}
+export type EditedPost = Omit<Post, 'created_at' | 'user_id'>

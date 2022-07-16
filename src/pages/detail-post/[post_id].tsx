@@ -9,7 +9,7 @@ import { useDownloadUrl } from 'hooks/useDownloadUrl'
 import Header from 'components/uiParts/Header'
 
 const DetailPost: FC = () => {
-  const [post, setPost] = useState<Post[] | null>(null)
+  const [post, setPost] = useState<Omit<Post, 'created_at' | 'user_id'>[] | null>(null)
   const [detailPostUrl, setDetailPostUrl] = useState<string | undefined>(undefined)
   const { fullUrl: postUrl, isLoading: isLoadingPost } = useDownloadUrl(detailPostUrl, 'posts')
   const router = useRouter()
@@ -20,11 +20,11 @@ const DetailPost: FC = () => {
 
   useEffect(() => {
     if (isReady && posts) {
-      const post = posts.filter((posts) => {
+      const detailPost = posts.filter((posts) => {
         return posts.id === post_id
       })
-      setPost(post)
-      setDetailPostUrl(post[0].post_url)
+      setPost(detailPost)
+      setDetailPostUrl(detailPost[0].post_url)
     }
   }, [isReady, post_id])
 
