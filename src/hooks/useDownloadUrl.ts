@@ -9,12 +9,14 @@ export const useDownloadUrl = (filePath: string | undefined, key: 'avatars' | 'p
     if (filePath) {
       const download = async () => {
         setIsLoading(true)
-        const { data, error } = await supabase.storage.from(bucketName).download(filePath)
+        // const { data, error } = await supabase.storage.from(bucketName).download(filePath)
+        const { data, error } = await supabase.storage.from(bucketName).getPublicUrl(filePath)
         if (error) {
           setIsLoading(false)
           throw error
         }
-        setFullUrl(URL.createObjectURL(data!))
+        // setFullUrl(URL.createObjectURL(data!))
+        data !== null && setFullUrl(data.publicURL)
         setIsLoading(false)
       }
       download()
