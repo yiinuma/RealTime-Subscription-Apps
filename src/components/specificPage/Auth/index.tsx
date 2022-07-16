@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import * as Yup from 'yup'
-import { AiOutlineSafety, AiOutlineExclamationCircle } from 'react-icons/ai'
+import { AiOutlineExclamationCircle } from 'react-icons/ai'
 import {
   Anchor,
   NumberInput,
@@ -52,7 +52,6 @@ export const Auth = () => {
       // _event: SIGNED_IN, SIGNED_OUT
       // session: セッション情報
       setSession(session)
-      console.log(_event)
     })
   }, [setSession])
 
@@ -64,6 +63,7 @@ export const Auth = () => {
       })
       if (error) {
         setError(error.message)
+        return
       }
       form.reset()
       setOpened(false)
@@ -74,6 +74,7 @@ export const Auth = () => {
       })
       if (error) {
         setError(error.message)
+        return
       }
       form.reset()
       setOpened(false)
@@ -82,9 +83,6 @@ export const Auth = () => {
 
   return (
     <Box>
-      <Center>
-        <AiOutlineSafety className='h-12 w-12 text-blue-500' />
-      </Center>
       {error && (
         <Alert
           mt='md'
