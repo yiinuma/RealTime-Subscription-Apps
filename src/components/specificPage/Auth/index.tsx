@@ -31,7 +31,7 @@ const scheme = Yup.object().shape({
 
 export const Auth = () => {
   const setSession = useStore((state) => state.setSession)
-  const setOpened = useStore((state) => state.setOpened)
+  const setAuthOpened = useStore((state) => state.setAuthOpened)
   const [isLogin, setIsLogin] = useState(true)
   const [error, setError] = useState('')
   const form = useForm<Form>({
@@ -66,7 +66,7 @@ export const Auth = () => {
         return
       }
       form.reset()
-      setOpened(false)
+      setAuthOpened(false)
     } else {
       const { error } = await supabase.auth.signUp({
         email: form.values.email,
@@ -77,7 +77,7 @@ export const Auth = () => {
         return
       }
       form.reset()
-      setOpened(false)
+      setAuthOpened(false)
     }
   }
 

@@ -13,3 +13,15 @@ export type Post = {
 }
 
 export type EditedPost = Omit<Post, 'created_at' | 'user_id'>
+
+export type Profile = {
+  id: string | undefined
+  created_at: string
+  username: string | undefined
+  avatar_url: string | undefined
+}
+
+export type EditedProfile = {
+  username: string | undefined
+  avatar_url: string | undefined
+}

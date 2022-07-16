@@ -1,26 +1,43 @@
 import Link from 'next/link'
-import { Button, Modal } from '@mantine/core'
+import { ActionIcon, Avatar, Button, Modal } from '@mantine/core'
 
 import { Auth } from 'components/specificPage/Auth'
 import useStore from 'store'
 import { supabase } from 'utils/supabase'
+import { useDownloadUrl } from 'hooks/useDownloadUrl'
+import { useQueryAvatar } from 'hooks/useQueryAvatar'
+import { Profiler } from 'inspector'
 
 const Header = () => {
   const resetPost = useStore((state) => state.resetEditedPost)
   const session = useStore((state) => state.session)
-  const opened = useStore((state) => state.opened)
-  const setOpened = useStore((state) => state.setOpened)
+  const editedProfile = useStore((state) => state.editedProfile)
+  const authOpened = useStore((state) => state.authOpened)
+  const setAuthOpened = useStore((state) => state.setAuthOpened)
+  const profileOpened = useStore((state) => state.profileOpened)
+  const setProfileOpened = useStore((state) => state.setProfileOpened)
+  const userId = session?.user?.id
+  const { data } = useQueryAvatar(userId)
+  const { fullUrl: avatarUrl, isLoading } = useDownloadUrl(data?.avatar_url, 'avatars')
+  console.log(userId, data)
 
   return (
     <header className='sticky top-0 z-50 bg-white'>
       <Modal
         size='md'
-        opened={opened}
-        onClose={() => setOpened(false)}
+        opened={authOpened}
+        onClose={() => setAuthOpened(false)}
         title='Login to your account'
       >
         <Auth />
       </Modal>
+      <Modal
+        size='md'
+        opened={profileOpened}
+        onClose={() => setProfileOpened(false)}
+        title='Your profile'
+      ></Modal>
+
       <div className='container mx-auto flex h-14 items-center justify-between py-1 px-3 md:h-16'>
         <Link href='/'>
           <a className='flex cursor-pointer text-black no-underline'>
@@ -28,21 +45,31 @@ const Header = () => {
           </a>
         </Link>
         {!session ? (
-          <Button style={{ outlineWidth: 0 }} variant='light' onClick={() => setOpened(true)}>
+          <Button style={{ outlineWidth: 0 }} variant='light' onClick={() => setAuthOpened(true)}>
             New Post
           </Button>
         ) : (
-          <Button
-            style={{ outlineWidth: 0 }}
-            variant='light'
-            color='red'
-            onClick={() => {
-              supabase.auth.signOut()
-              resetPost()
-            }}
-          >
-            Logout
-          </Button>
+          <div className='row flex items-center'>
+            <ActionIcon onClick={() => setProfileOpened(true)}>
+              {avatarUrl ? (
+                <Avatar src={avatarUrl} alt='Avatar' radius='xl' />
+              ) : (
+                <Avatar src='' radius='xl' />
+              )}
+            </ActionIcon>
+            <Button
+              className='ml-4'
+              style={{ outlineWidth: 0 }}
+              variant='light'
+              color='red'
+              onClick={() => {
+                supabase.auth.signOut()
+                resetPost()
+              }}
+            >
+              Logout
+            </Button>
+          </div>
         )}
       </div>
     </header>
