@@ -3,14 +3,13 @@ import type { NextPage } from 'next'
 import useStore from 'store'
 import { useQueryPosts } from 'hooks/useQueryPosts'
 import { useSubscribePosts } from 'hooks/useSubscribePosts'
-import Header from 'components/uiParts/Header'
-import Footer from 'components/uiParts/Footer'
+import { Header } from 'components/uiParts/Header'
+import { Footer } from 'components/uiParts/Footer'
 import { PostForm } from 'components/specificPage/PostForm'
 import { PostItem } from 'components/specificPage/PostItem'
 
 const Home: NextPage = () => {
   const session = useStore((state) => state.session)
-
   const { data: posts } = useQueryPosts()
   useSubscribePosts()
 

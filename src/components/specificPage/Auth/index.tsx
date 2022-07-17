@@ -30,6 +30,7 @@ const scheme = Yup.object().shape({
 })
 
 export const Auth = () => {
+  const session = useStore((state) => state.session)
   const setSession = useStore((state) => state.setSession)
   const setAuthOpened = useStore((state) => state.setAuthOpened)
   const [isLogin, setIsLogin] = useState(true)
@@ -53,7 +54,7 @@ export const Auth = () => {
       // session: セッション情報
       setSession(session)
     })
-  }, [setSession])
+  }, [setSession, session])
 
   const handleSubmit = async () => {
     if (isLogin) {

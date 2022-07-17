@@ -6,7 +6,7 @@ import { Post } from 'types'
 import { useQueryPosts } from 'hooks/useQueryPosts'
 import { useSubscribePosts } from 'hooks/useSubscribePosts'
 import { useDownloadUrl } from 'hooks/useDownloadUrl'
-import Header from 'components/uiParts/Header'
+import { Header } from 'components/uiParts/Header'
 
 const DetailPost: FC = () => {
   const [post, setPost] = useState<Omit<Post, 'created_at' | 'user_id'>[] | null>(null)

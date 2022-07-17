@@ -1,25 +1,27 @@
 import Link from 'next/link'
 import { ActionIcon, Avatar, Button, Modal } from '@mantine/core'
 
+import { FC } from 'react'
+
 import { Auth } from 'components/specificPage/Auth'
 import useStore from 'store'
 import { supabase } from 'utils/supabase'
 import { useDownloadUrl } from 'hooks/useDownloadUrl'
 import { useQueryAvatar } from 'hooks/useQueryAvatar'
-import { Profiler } from 'inspector'
 
-const Header = () => {
+type Props = {
+  userId: string | undefined
+}
+export const Header: FC = () => {
+  const user = supabase.auth.user()
   const resetPost = useStore((state) => state.resetEditedPost)
   const session = useStore((state) => state.session)
-  const editedProfile = useStore((state) => state.editedProfile)
   const authOpened = useStore((state) => state.authOpened)
   const setAuthOpened = useStore((state) => state.setAuthOpened)
   const profileOpened = useStore((state) => state.profileOpened)
   const setProfileOpened = useStore((state) => state.setProfileOpened)
-  const userId = session?.user?.id
-  const { data } = useQueryAvatar(userId)
+  const { data } = useQueryAvatar(user?.id)
   const { fullUrl: avatarUrl, isLoading } = useDownloadUrl(data?.avatar_url, 'avatars')
-  console.log(userId, data)
 
   return (
     <header className='sticky top-0 z-50 bg-white'>
@@ -75,5 +77,3 @@ const Header = () => {
     </header>
   )
 }
-
-export default Header

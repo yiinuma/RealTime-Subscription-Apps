@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Group, ActionIcon, Text, Image } from '@mantine/core'
 import { AiOutlineTwitter } from 'react-icons/ai'
 
-const Footer = () => {
+export const Footer: FC = () => {
   return (
     <footer className='sticky bottom-0 z-50 h-14 bg-white'>
       <div className='container mx-auto flex items-center justify-between py-3 px-2'>
@@ -25,5 +25,3 @@ const Footer = () => {
     </footer>
   )
 }
-
-export default Footer
