@@ -3,13 +3,12 @@ import { ActionIcon, Avatar, Button, Modal } from '@mantine/core'
 
 import { FC, useEffect, useState } from 'react'
 
-import { Auth } from 'components/specificPage/Auth'
 import useStore from 'store'
 import { supabase } from 'utils/supabase'
 import { useDownloadUrl } from 'hooks/useDownloadUrl'
 import { useQueryAvatar } from 'hooks/useQueryAvatar'
-import { User } from '@supabase/supabase-js'
-import { Profile } from 'types'
+import { Auth } from 'components/specificPage/Auth'
+import { Profile } from 'components/specificPage/Profile'
 
 // type Props = {
 //   userId: string | undefined
@@ -43,7 +42,9 @@ export const Header: FC = () => {
         opened={profileOpened}
         onClose={() => setProfileOpened(false)}
         title='Your profile'
-      ></Modal>
+      >
+        <Profile />
+      </Modal>
 
       <div className='container mx-auto flex h-14 items-center justify-between py-1 px-3 md:h-16'>
         <Link href='/'>

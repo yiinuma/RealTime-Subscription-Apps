@@ -16,15 +16,6 @@ const Home: NextPage = () => {
   const { data: posts } = useQueryPosts()
   useSubscribePosts()
 
-  // const [userId, setUserId] = useState<string>()
-  // const user = supabase.auth.user()
-
-  // useEffect(() => {
-  //   if (user !== null) {
-  //     setUserId(user.id)
-  //   }
-  // }, [user])
-
   return (
     <div className='flex min-h-screen flex-col bg-slate-50 font-sans'>
       <Header />
