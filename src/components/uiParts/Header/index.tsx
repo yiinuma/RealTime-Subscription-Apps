@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import Link from 'next/link'
 import { ActionIcon, Avatar, Button, Modal } from '@mantine/core'
+import { useQueryClient } from 'react-query'
 
 import useStore from 'store'
 import { supabase } from 'utils/supabase'
@@ -10,7 +11,9 @@ import { Auth } from 'components/specificPage/Auth'
 import { Profile } from 'components/specificPage/Profile'
 
 export const Header: FC = () => {
+  const queryClient = useQueryClient()
   const resetPost = useStore((state) => state.resetEditedPost)
+  const resetProfile = useStore((state) => state.resetEditedProfile)
   const session = useStore((state) => state.session)
   const authOpened = useStore((state) => state.authOpened)
   const setAuthOpened = useStore((state) => state.setAuthOpened)
@@ -61,6 +64,9 @@ export const Header: FC = () => {
               onClick={() => {
                 supabase.auth.signOut()
                 resetPost()
+                resetProfile()
+                queryClient.removeQueries(['posts'])
+                queryClient.removeQueries(['profile'])
               }}
             >
               Logout
