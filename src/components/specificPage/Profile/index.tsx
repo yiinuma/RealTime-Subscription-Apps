@@ -12,11 +12,10 @@ export const Profile = () => {
   const session = useStore((state) => state.session)
   const editedProfile = useStore((state) => state.editedProfile)
   const update = useStore((state) => state.updateEditedProfile)
-  const user = supabase.auth.user()
-  const { data: profile } = useQueryProfile(user?.id)
+  const { data: profile } = useQueryProfile()
   const { updateProfileMutation } = useMutateProfile()
   const { useMutateUploadAvatarImg } = useUploadAvatarImg()
-  const { fullUrl: avatarUrl, isLoading } = useDownloadUrl(profile?.avatar_url, 'avatars')
+  const { fullUrl: avatarUrl, isLoading } = useDownloadUrl(editedProfile.avatar_url, 'avatars')
   const updateProfile = () => {
     updateProfileMutation.mutate({
       id: session?.user?.id,
@@ -27,7 +26,7 @@ export const Profile = () => {
 
   return (
     <>
-      <p className='my-0 text-lg'>username : {profile?.username}</p>
+      <p className='my-0 text-2xl'>username : {profile?.username}</p>
       <Group position='apart'>
         <TextInput
           className='w-8/12'
@@ -37,7 +36,7 @@ export const Profile = () => {
           onChange={(e) => update({ ...editedProfile, username: e.target.value })}
         />
         <Button
-          className='mt-6 w-3/12'
+          className='mt-6'
           onClick={updateProfile}
           disabled={updateProfileMutation.isLoading || !editedProfile.username}
         >
@@ -45,20 +44,29 @@ export const Profile = () => {
         </Button>
       </Group>
 
-      <Group className='mt-6'>
-        <Avatar src={avatarUrl} alt='Avatar' radius='xl' size='xl' />
-        <div className='flex justify-center'>
+      <Group className='mt-6 w-full' position='apart'>
+        <Group>
+          <Avatar src={avatarUrl} alt='Avatar' radius='xl' size='xl' />
           <label htmlFor='avatar'>
-            <AiFillCamera className='mt-2 h-10 w-10 cursor-pointer text-blue-500' />
+            <Group className=' cursor-pointer'>
+              <AiFillCamera className='h-10 w-10 text-blue-500' />
+              <p>select image</p>
+            </Group>
           </label>
           <input
             className='hidden'
             type='file'
             id='avatar'
             accept='image/*'
-            onChange={(e) => useMutateUploadAvatarImg.mutate(e)}
+            onClick={updateProfile}
+            onChange={(e) => {
+              useMutateUploadAvatarImg.mutate(e)
+            }}
           />
-        </div>
+        </Group>
+        <Button onClick={updateProfile}>
+          {updateProfileMutation.isLoading ? <Loader size='sm' /> : 'Update'}
+        </Button>
       </Group>
     </>
   )

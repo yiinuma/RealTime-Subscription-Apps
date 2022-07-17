@@ -19,7 +19,6 @@ export const Header: FC = () => {
   const user = supabase.auth.user()
   const { data } = useQueryAvatar(user?.id)
   const { fullUrl: avatarUrl, isLoading } = useDownloadUrl(data?.avatar_url, 'avatars')
-
   return (
     <header className='sticky top-0 z-50 bg-white'>
       <Modal
