@@ -6,15 +6,17 @@ import { useMutateProfile } from 'hooks/useMutateProfile'
 import { useUploadAvatarImg } from 'hooks/useUploadAvatarImg'
 import { useDownloadUrl } from 'hooks/useDownloadUrl'
 import { AiFillCamera } from 'react-icons/ai'
+import { supabase } from 'utils/supabase'
 
 export const Profile = () => {
   const session = useStore((state) => state.session)
   const editedProfile = useStore((state) => state.editedProfile)
   const update = useStore((state) => state.updateEditedProfile)
-  const { data: profile } = useQueryProfile()
+  const user = supabase.auth.user()
+  const { data: profile } = useQueryProfile(user?.id)
   const { updateProfileMutation } = useMutateProfile()
   const { useMutateUploadAvatarImg } = useUploadAvatarImg()
-  const { fullUrl: avatarUrl, isLoading } = useDownloadUrl(editedProfile.avatar_url, 'avatars')
+  const { fullUrl: avatarUrl, isLoading } = useDownloadUrl(profile?.avatar_url, 'avatars')
   const updateProfile = () => {
     updateProfileMutation.mutate({
       id: session?.user?.id,
