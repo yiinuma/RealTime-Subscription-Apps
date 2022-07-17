@@ -62,11 +62,12 @@ export const Header: FC = () => {
               variant='light'
               color='red'
               onClick={() => {
-                supabase.auth.signOut()
                 resetPost()
                 resetProfile()
+                supabase.auth.signOut()
                 queryClient.removeQueries(['posts'])
                 queryClient.removeQueries(['profile'])
+                queryClient.removeQueries(['avatar-url'])
               }}
             >
               Logout
