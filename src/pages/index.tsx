@@ -7,11 +7,23 @@ import { Header } from 'components/uiParts/Header'
 import { Footer } from 'components/uiParts/Footer'
 import { PostForm } from 'components/specificPage/PostForm'
 import { PostItem } from 'components/specificPage/PostItem'
+import { useEffect, useState } from 'react'
+import { supabase } from 'utils/supabase'
+import { User } from '@supabase/supabase-js'
 
 const Home: NextPage = () => {
   const session = useStore((state) => state.session)
   const { data: posts } = useQueryPosts()
   useSubscribePosts()
+
+  // const [userId, setUserId] = useState<string>()
+  // const user = supabase.auth.user()
+
+  // useEffect(() => {
+  //   if (user !== null) {
+  //     setUserId(user.id)
+  //   }
+  // }, [user])
 
   return (
     <div className='flex min-h-screen flex-col bg-slate-50 font-sans'>

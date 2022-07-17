@@ -1,25 +1,30 @@
 import Link from 'next/link'
 import { ActionIcon, Avatar, Button, Modal } from '@mantine/core'
 
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import { Auth } from 'components/specificPage/Auth'
 import useStore from 'store'
 import { supabase } from 'utils/supabase'
 import { useDownloadUrl } from 'hooks/useDownloadUrl'
 import { useQueryAvatar } from 'hooks/useQueryAvatar'
+import { User } from '@supabase/supabase-js'
+import { Profile } from 'types'
 
-type Props = {
-  userId: string | undefined
-}
+// type Props = {
+//   userId: string | undefined
+// }
+
 export const Header: FC = () => {
-  const user = supabase.auth.user()
+  // const { userId } = props
+
   const resetPost = useStore((state) => state.resetEditedPost)
   const session = useStore((state) => state.session)
   const authOpened = useStore((state) => state.authOpened)
   const setAuthOpened = useStore((state) => state.setAuthOpened)
   const profileOpened = useStore((state) => state.profileOpened)
   const setProfileOpened = useStore((state) => state.setProfileOpened)
+  const user = supabase.auth.user()
   const { data } = useQueryAvatar(user?.id)
   const { fullUrl: avatarUrl, isLoading } = useDownloadUrl(data?.avatar_url, 'avatars')
 
@@ -53,11 +58,7 @@ export const Header: FC = () => {
         ) : (
           <div className='row flex items-center'>
             <ActionIcon onClick={() => setProfileOpened(true)}>
-              {avatarUrl ? (
-                <Avatar src={avatarUrl} alt='Avatar' radius='xl' />
-              ) : (
-                <Avatar src='' radius='xl' />
-              )}
+              <Avatar src={avatarUrl} alt='Avatar' radius='xl' />
             </ActionIcon>
             <Button
               className='ml-4'
