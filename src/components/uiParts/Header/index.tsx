@@ -1,7 +1,6 @@
+import { FC } from 'react'
 import Link from 'next/link'
 import { ActionIcon, Avatar, Button, Modal } from '@mantine/core'
-
-import { FC, useEffect, useState } from 'react'
 
 import useStore from 'store'
 import { supabase } from 'utils/supabase'
@@ -10,13 +9,7 @@ import { useQueryAvatar } from 'hooks/useQueryAvatar'
 import { Auth } from 'components/specificPage/Auth'
 import { Profile } from 'components/specificPage/Profile'
 
-// type Props = {
-//   userId: string | undefined
-// }
-
 export const Header: FC = () => {
-  // const { userId } = props
-
   const resetPost = useStore((state) => state.resetEditedPost)
   const session = useStore((state) => state.session)
   const authOpened = useStore((state) => state.authOpened)
@@ -59,7 +52,7 @@ export const Header: FC = () => {
         ) : (
           <div className='row flex items-center'>
             <ActionIcon onClick={() => setProfileOpened(true)}>
-              <Avatar src={avatarUrl} alt='Avatar' radius='xl' />
+              <Avatar src={avatarUrl} alt='Avatar' radius='lg' size='md' />
             </ActionIcon>
             <Button
               className='ml-4'

@@ -1,10 +1,11 @@
-import { Avatar } from '@mantine/core'
+import { ActionIcon, Avatar, Button, Group, Loader, TextInput } from '@mantine/core'
 
 import useStore from 'store'
 import { useQueryProfile } from 'hooks/useQueryProfile'
 import { useMutateProfile } from 'hooks/useMutateProfile'
 import { useUploadAvatarImg } from 'hooks/useUploadAvatarImg'
 import { useDownloadUrl } from 'hooks/useDownloadUrl'
+import { AiFillCamera } from 'react-icons/ai'
 
 export const Profile = () => {
   const session = useStore((state) => state.session)
@@ -24,40 +25,39 @@ export const Profile = () => {
 
   return (
     <>
-      <p className='mb-4'>{profile?.username}</p>
-      <p className='mt-4'>Username</p>
-      <input
-        className='my-2 mx-2 rounded border border-gray-300 px-3 py-2 text-sm focus:outline-none'
-        type='text'
-        placeholder='Username'
-        value={editedProfile.username || ''}
-        onChange={(e) => update({ ...editedProfile, username: e.target.value })}
-      />
-      <button
-        className={`my-5 rounded ${
-          updateProfileMutation.isLoading || !editedProfile.username
-            ? 'bg-gray-400'
-            : 'bg-indigo-600'
-        } px-3 py-2 text-sm font-medium text-white`}
-        onClick={updateProfile}
-        disabled={updateProfileMutation.isLoading || !editedProfile.username}
-      >
-        {updateProfileMutation.isLoading ? 'Loading ...' : 'Update'}
-      </button>
-      {avatarUrl && <Avatar src={avatarUrl} alt='Avator' radius='xl' />}
-      <div className='flex justify-center'>
-        <label htmlFor='avatar'>
-          <p>camera</p>
-          {/* <CameraIcon className='my-3 h-7 w-7 cursor-pointer text-gray-500' /> */}
-        </label>
-        <input
-          className='hidden'
-          type='file'
-          id='avatar'
-          accept='image/*'
-          onChange={(e) => useMutateUploadAvatarImg.mutate(e)}
+      <p className='my-0 text-lg'>username : {profile?.username}</p>
+      <Group position='apart'>
+        <TextInput
+          className='w-8/12'
+          placeholder='Your name'
+          label='username update'
+          value={editedProfile.username || ''}
+          onChange={(e) => update({ ...editedProfile, username: e.target.value })}
         />
-      </div>
+        <Button
+          className='mt-6 w-3/12'
+          onClick={updateProfile}
+          disabled={updateProfileMutation.isLoading || !editedProfile.username}
+        >
+          {updateProfileMutation.isLoading ? <Loader size='sm' /> : 'Update'}
+        </Button>
+      </Group>
+
+      <Group className='mt-6'>
+        <Avatar src={avatarUrl} alt='Avatar' radius='xl' size='xl' />
+        <div className='flex justify-center'>
+          <label htmlFor='avatar'>
+            <AiFillCamera className='mt-2 h-10 w-10 cursor-pointer text-blue-500' />
+          </label>
+          <input
+            className='hidden'
+            type='file'
+            id='avatar'
+            accept='image/*'
+            onChange={(e) => useMutateUploadAvatarImg.mutate(e)}
+          />
+        </div>
+      </Group>
     </>
   )
 }
