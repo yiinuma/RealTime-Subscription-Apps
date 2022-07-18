@@ -17,7 +17,6 @@ const PostItemMemo: FC<Omit<Post, 'created_at'>> = ({ id, title, post_url, descr
               {postUrl && (
                 <Image
                   className='rounded-t-lg'
-                  // src='https://picsum.photos/168/1000'
                   src={postUrl}
                   width={768}
                   height={768}
@@ -31,11 +30,7 @@ const PostItemMemo: FC<Omit<Post, 'created_at'>> = ({ id, title, post_url, descr
 
             <div className='px-3 pb-2'>
               <h2 className='text-lg'>{title}</h2>
-              <p className='line-clamp-3'>
-                {description}
-                {/* With Fjord Tours you can explore more of the magical fjord landscapes with tours and
-              activities on and around the fjords of Norway */}
-              </p>
+              <p className='line-clamp-3'>{description}</p>
             </div>
           </div>
         </a>

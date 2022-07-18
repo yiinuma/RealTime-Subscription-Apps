@@ -40,7 +40,7 @@ const DetailPost: NextPage = () => {
       <main>
         {post && (
           <div className='flex flex-col px-4 md:h-[calc(100vh-64px)] md:flex-row md:px-0'>
-            <div className='flex items-center justify-center p-[2.5%] md:h-full md:w-2/3 '>
+            <div className='flex items-center justify-center py-2 md:h-full md:w-2/3 md:p-[2.5%] '>
               {postUrl && isLoadingPost ? (
                 <Loader variant='bars' />
               ) : (
