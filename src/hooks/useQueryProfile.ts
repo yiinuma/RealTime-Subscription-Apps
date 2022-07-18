@@ -7,6 +7,7 @@ import { useMutateProfile } from 'hooks/useMutateProfile'
 
 export const useQueryProfile = () => {
   const session = useStore((state) => state.session)
+  const sessionUser = useStore((state) => state.sessionUser)
   const editedProfile = useStore((state) => state.editedProfile)
   const update = useStore((state) => state.updateEditedProfile)
   const { createProfileMutation } = useMutateProfile()
@@ -14,11 +15,11 @@ export const useQueryProfile = () => {
     const { data, error, status } = await supabase
       .from('profiles')
       .select('*')
-      .eq('id', session?.user?.id)
+      .eq('id', sessionUser)
       .single()
     if (error && status === 406) {
       createProfileMutation.mutate({
-        id: session?.user?.id,
+        id: sessionUser,
         username: session?.user?.email,
         avatar_url: '',
       })
