@@ -47,7 +47,7 @@ export const Header: FC = () => {
         </Link>
         {!session ? (
           <Button style={{ outlineWidth: 0 }} variant='light' onClick={() => setAuthOpened(true)}>
-            New Post
+            Login
           </Button>
         ) : (
           <div className='row flex items-center'>
