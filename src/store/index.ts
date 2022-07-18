@@ -9,6 +9,8 @@ type State = {
   setSessionUser: (payload: string | undefined) => void
   authOpened: boolean
   setAuthOpened: (state: boolean) => void
+  postFormOpened: boolean
+  setPostFormOpened: (state: boolean) => void
   profileOpened: boolean
   setProfileOpened: (state: boolean) => void
   editedPost: EditedPost
@@ -25,6 +27,8 @@ const useStore = create<State>((set) => ({
   setSessionUser: (payload) => set({ sessionUser: payload }),
   authOpened: false,
   setAuthOpened: (state) => set({ authOpened: state }),
+  postFormOpened: false,
+  setPostFormOpened: (state) => set({ postFormOpened: state }),
   profileOpened: false,
   setProfileOpened: (state) => set({ profileOpened: state }),
   editedPost: { id: '', title: '', post_url: '', description: '' },

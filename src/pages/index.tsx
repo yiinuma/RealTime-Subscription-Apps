@@ -5,11 +5,9 @@ import { useQueryPosts } from 'hooks/useQueryPosts'
 import { useSubscribePosts } from 'hooks/useSubscribePosts'
 import { Header } from 'components/uiParts/Header'
 import { Footer } from 'components/uiParts/Footer'
-import { PostForm } from 'components/specificPage/PostForm'
 import { PostItem } from 'components/specificPage/PostItem'
 
 const Home: NextPage = () => {
-  const session = useStore((state) => state.session)
   const { data: posts } = useQueryPosts()
   useSubscribePosts()
 
@@ -18,7 +16,6 @@ const Home: NextPage = () => {
       <Header />
       <main className='flex flex-col px-4 md:min-h-[calc(100vh-122px)] md:px-0'>
         <div className='container mx-auto py-4 md:px-24'>
-          {session && <PostForm />}
           <ul className='grid gap-4 px-0 md:grid-cols-3 xl:grid-cols-4'>
             {posts?.map((post) => (
               <PostItem

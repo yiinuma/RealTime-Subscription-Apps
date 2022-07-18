@@ -1,6 +1,6 @@
 import React, { FormEvent, FC, memo } from 'react'
 import Image from 'next/image'
-import { Button, Input } from '@mantine/core'
+import { Button, Input, Textarea } from '@mantine/core'
 import { AiFillCamera } from 'react-icons/ai'
 
 import useStore from 'store'
@@ -45,15 +45,17 @@ export const PostFormMemo: FC = () => {
           update({ ...editedPost, title: e.target.value })
         }
       />
-      <Input
+      <Textarea
         className='mt-2'
         placeholder='description?'
+        autosize
+        minRows={6}
         value={editedPost.description}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
           update({ ...editedPost, description: e.target.value })
         }
       />
-      <div className='flex items-center justify-center'>
+      <div className='my-4 flex items-center justify-center'>
         <div className='flex justify-center'>
           <label htmlFor='post'>
             <div className='flex cursor-pointer items-center justify-center'>
@@ -88,7 +90,7 @@ export const PostFormMemo: FC = () => {
         </div>
       </div>
 
-      <div className='mb-8 flex justify-center'>
+      <div className='my-4 flex justify-center'>
         <Button type='submit' disabled={useMutateUploadPostImg.isLoading || !editedPost.title}>
           {editedPost.id ? 'Update' : 'Create'}
         </Button>
