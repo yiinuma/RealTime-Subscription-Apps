@@ -38,7 +38,7 @@ const useStore = create<State>((set) => ({
       },
     }),
   resetEditedPost: () => set({ editedPost: { id: '', title: '', post_url: '', description: '' } }),
-  editedProfile: { username: '', favorites: '', avatar_url: '' },
+  editedProfile: { username: '', avatar_url: '' },
   updateEditedProfile: (payload) =>
     set({
       editedProfile: {
@@ -47,6 +47,5 @@ const useStore = create<State>((set) => ({
       },
     }),
   resetEditedProfile: () => set({ editedProfile: { username: '', avatar_url: '' } }),
-  editedNotice: { id: '', content: '' },
 }))
 export default useStore

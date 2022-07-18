@@ -6,7 +6,7 @@ import { useMutateProfile } from 'hooks/useMutateProfile'
 import { useUploadAvatarImg } from 'hooks/useUploadAvatarImg'
 import { useDownloadUrl } from 'hooks/useDownloadUrl'
 import { AiFillCamera } from 'react-icons/ai'
-import { UserAvatar } from 'components/uiParts/UserAvatar'
+import { useEffect } from 'react'
 
 export const Profile = () => {
   const session = useStore((state) => state.session)
@@ -19,7 +19,7 @@ export const Profile = () => {
   const { fullUrl: avatarUrl, isLoading } = useDownloadUrl(editedProfile.avatar_url, 'avatars')
   const updateProfile = () => {
     updateProfileMutation.mutate({
-      id: session?.user?.id,
+      id: sessionUser,
       username: editedProfile.username,
       avatar_url: editedProfile.avatar_url,
     })
