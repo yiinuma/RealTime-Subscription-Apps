@@ -12,28 +12,26 @@ export const useQueryProfile = () => {
   const update = useStore((state) => state.updateEditedProfile)
   const { createProfileMutation } = useMutateProfile()
   const getProfile = async () => {
-    if (sessionUser) {
-      const { data, error, status } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', sessionUser)
-        .single()
-      if (error && status === 406) {
-        createProfileMutation.mutate({
-          id: sessionUser,
-          username: session?.user?.email,
-          avatar_url: '',
-        })
-        update({
-          ...editedProfile,
-          username: session?.user?.email,
-        })
-      }
-      if (error && status !== 406) {
-        throw new Error(error.message)
-      }
-      return data
+    const { data, error, status } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', sessionUser)
+      .single()
+    if (error && status === 406) {
+      createProfileMutation.mutate({
+        id: sessionUser,
+        username: session?.user?.email,
+        avatar_url: '',
+      })
+      update({
+        ...editedProfile,
+        username: session?.user?.email,
+      })
     }
+    if (error && status !== 406) {
+      throw new Error(error.message)
+    }
+    return data
   }
   return useQuery<Profile, Error>({
     queryKey: ['profile'],

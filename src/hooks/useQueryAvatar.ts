@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query'
 import { supabase } from 'utils/supabase'
 import { Profile } from 'types'
-export const useQueryAvatar = (userId: string | undefined) => {
+export const useQueryAvatar = (userId: string) => {
   const getAvatarUrl = async () => {
     const { data, error } = await supabase
       .from('profiles')

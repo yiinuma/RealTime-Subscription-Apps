@@ -6,9 +6,11 @@ import { useMutateProfile } from 'hooks/useMutateProfile'
 import { useUploadAvatarImg } from 'hooks/useUploadAvatarImg'
 import { useDownloadUrl } from 'hooks/useDownloadUrl'
 import { AiFillCamera } from 'react-icons/ai'
+import { UserAvatar } from 'components/uiParts/UserAvatar'
 
 export const Profile = () => {
   const session = useStore((state) => state.session)
+  const sessionUser = useStore((state) => state.sessionUser)
   const editedProfile = useStore((state) => state.editedProfile)
   const update = useStore((state) => state.updateEditedProfile)
   const { data: profile } = useQueryProfile()
@@ -45,7 +47,7 @@ export const Profile = () => {
 
       <Group className='mt-6 w-full' position='apart'>
         <Group>
-          <Avatar src={avatarUrl} alt='Avatar' radius='xl' size='xl' />
+          {sessionUser && <Avatar src={avatarUrl} alt='Avatar' radius='xl' size='xl' />}
           <label htmlFor='avatar'>
             <Group className=' cursor-pointer'>
               <AiFillCamera className='h-10 w-10 text-blue-500' />
