@@ -30,8 +30,6 @@ const scheme = Yup.object().shape({
 })
 
 export const Auth = () => {
-  const session = useStore((state) => state.session)
-  const setSession = useStore((state) => state.setSession)
   const setAuthOpened = useStore((state) => state.setAuthOpened)
   const [isLogin, setIsLogin] = useState(true)
   const [error, setError] = useState('')
@@ -43,18 +41,6 @@ export const Auth = () => {
       age: 15,
     },
   })
-
-  useEffect(() => {
-    // アクティブなセッションがある場合そのセッションデータが返ってくる
-    setSession(supabase.auth.session())
-
-    // 認証イベントが発生するたびに通知を受け取ります。
-    supabase.auth.onAuthStateChange((_event, session) => {
-      // _event: SIGNED_IN, SIGNED_OUT
-      // session: セッション情報
-      setSession(session)
-    })
-  }, [setSession, session])
 
   const handleSubmit = async () => {
     if (isLogin) {

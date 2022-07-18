@@ -6,7 +6,6 @@ import { useMutateProfile } from 'hooks/useMutateProfile'
 import { useUploadAvatarImg } from 'hooks/useUploadAvatarImg'
 import { useDownloadUrl } from 'hooks/useDownloadUrl'
 import { AiFillCamera } from 'react-icons/ai'
-import { supabase } from 'utils/supabase'
 
 export const Profile = () => {
   const session = useStore((state) => state.session)

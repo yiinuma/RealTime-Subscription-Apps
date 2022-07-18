@@ -9,13 +9,40 @@ import { PostForm } from 'components/specificPage/PostForm'
 import { PostItem } from 'components/specificPage/PostItem'
 import { useEffect, useState } from 'react'
 import { supabase } from 'utils/supabase'
-import { User } from '@supabase/supabase-js'
 
 const Home: NextPage = () => {
   const session = useStore((state) => state.session)
+  const setSession = useStore((state) => state.setSession)
+  const sessionUser = useStore((state) => state.sessionUser)
+  const setSessionUser = useStore((state) => state.setSessionUser)
   const { data: posts } = useQueryPosts()
   useSubscribePosts()
+  useEffect(() => {
+    // アクティブなセッションがある場合そのセッションデータが返ってくる
+    setSession(supabase.auth.session())
 
+    // 認証イベントが発生するたびに通知を受け取ります。
+    supabase.auth.onAuthStateChange((_event, session) => {
+      // _event: SIGNED_IN, SIGNED_OUT
+      // session: セッション情報
+      setSession(session)
+    })
+  }, [setSession, session])
+
+  useEffect(() => {
+    const setupUser = async () => {
+      if (session?.user?.id) {
+        const { data: user } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', session.user.id)
+          .single()
+        setSessionUser(user.id)
+      }
+    }
+    setupUser()
+  }, [setSession, session])
+  console.log(sessionUser)
   return (
     <div className='flex min-h-screen flex-col bg-slate-50 font-sans'>
       <Header />

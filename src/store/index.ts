@@ -5,6 +5,8 @@ import { EditedPost, EditedProfile } from 'types'
 type State = {
   session: Session | null
   setSession: (payload: Session | null) => void
+  sessionUser: string | undefined
+  setSessionUser: (payload: string | undefined) => void
   authOpened: boolean
   setAuthOpened: (state: boolean) => void
   profileOpened: boolean
@@ -19,6 +21,8 @@ type State = {
 const useStore = create<State>((set) => ({
   session: null,
   setSession: (payload) => set({ session: payload }),
+  sessionUser: undefined,
+  setSessionUser: (payload) => set({ sessionUser: payload }),
   authOpened: false,
   setAuthOpened: (state) => set({ authOpened: state }),
   profileOpened: false,

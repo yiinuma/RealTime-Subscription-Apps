@@ -7,30 +7,33 @@ import { useMutateProfile } from 'hooks/useMutateProfile'
 
 export const useQueryProfile = () => {
   const session = useStore((state) => state.session)
+  const sessionUser = useStore((state) => state.sessionUser)
   const editedProfile = useStore((state) => state.editedProfile)
   const update = useStore((state) => state.updateEditedProfile)
   const { createProfileMutation } = useMutateProfile()
   const getProfile = async () => {
-    const { data, error, status } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', session?.user?.id)
-      .single()
-    if (error && status === 406) {
-      createProfileMutation.mutate({
-        id: session?.user?.id,
-        username: session?.user?.email,
-        avatar_url: '',
-      })
-      update({
-        ...editedProfile,
-        username: session?.user?.email,
-      })
+    if (sessionUser) {
+      const { data, error, status } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', sessionUser)
+        .single()
+      if (error && status === 406) {
+        createProfileMutation.mutate({
+          id: sessionUser,
+          username: session?.user?.email,
+          avatar_url: '',
+        })
+        update({
+          ...editedProfile,
+          username: session?.user?.email,
+        })
+      }
+      if (error && status !== 406) {
+        throw new Error(error.message)
+      }
+      return data
     }
-    if (error && status !== 406) {
-      throw new Error(error.message)
-    }
-    return data
   }
   return useQuery<Profile, Error>({
     queryKey: ['profile'],
