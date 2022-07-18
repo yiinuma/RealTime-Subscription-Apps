@@ -1,4 +1,5 @@
-import { FC, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { Loader } from '@mantine/core'
 
@@ -8,7 +9,7 @@ import { useSubscribePosts } from 'hooks/useSubscribePosts'
 import { useDownloadUrl } from 'hooks/useDownloadUrl'
 import { Header } from 'components/uiParts/Header'
 
-const DetailPost: FC = () => {
+const DetailPost: NextPage = () => {
   const [post, setPost] = useState<Omit<Post, 'created_at' | 'user_id'>[] | null>(null)
   const [detailPostUrl, setDetailPostUrl] = useState<string | undefined>(undefined)
   const { fullUrl: postUrl, isLoading: isLoadingPost } = useDownloadUrl(detailPostUrl, 'posts')
