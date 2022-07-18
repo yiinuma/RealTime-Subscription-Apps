@@ -19,7 +19,7 @@ export const Profile = () => {
   const { fullUrl: avatarUrl, isLoading } = useDownloadUrl(editedProfile.avatar_url, 'avatars')
   const updateProfile = () => {
     updateProfileMutation.mutate({
-      id: sessionUser,
+      id: session?.user?.id,
       username: editedProfile.username,
       avatar_url: editedProfile.avatar_url,
     })
