@@ -42,7 +42,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           .select('*')
           .eq('id', session.user.id)
           .single()
-        setSessionUser(user.id)
+        setSessionUser(session.user.id)
       }
     }
     setupUser()
