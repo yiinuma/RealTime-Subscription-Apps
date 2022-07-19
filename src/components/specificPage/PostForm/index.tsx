@@ -13,6 +13,7 @@ export const PostFormMemo: FC = () => {
   const session = useStore((state) => state.session)
   const editedPost = useStore((state) => state.editedPost)
   const update = useStore((state) => state.updateEditedPost)
+  const setPostFormOpened = useStore((state) => state.setPostFormOpened)
   const { createPostMutation, updatePostMutation } = useMutatePost()
   const { useMutateUploadPostImg } = useUploadPostImg()
   const { fullUrl: postUrl, setFullUrl } = useDownloadUrl(editedPost.post_url, 'posts')
@@ -25,6 +26,7 @@ export const PostFormMemo: FC = () => {
         post_url: editedPost.post_url,
         description: editedPost.description,
       })
+      setPostFormOpened(false)
       setFullUrl('')
     } else {
       await updatePostMutation.mutateAsync({
@@ -33,6 +35,7 @@ export const PostFormMemo: FC = () => {
         post_url: editedPost.post_url,
         description: editedPost.description,
       })
+      setPostFormOpened(false)
       setFullUrl('')
     }
   }

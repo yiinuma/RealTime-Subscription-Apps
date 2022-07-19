@@ -59,7 +59,7 @@ export const Header: FC = () => {
       <div className='container mx-auto flex h-[72px] flex-col items-center justify-between py-2 px-3 md:h-16 md:flex-row'>
         <Link href='/'>
           <a className='flex cursor-pointer text-black no-underline'>
-            <h1 className='my-0 text-xl md:text-2xl'>Realtime Subscription</h1>
+            <h1 className='my-0 text-xl md:text-2xl'>Image Posting Apps</h1>
           </a>
         </Link>
 
