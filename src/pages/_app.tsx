@@ -37,11 +37,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const setupUser = async () => {
       if (session?.user?.id) {
-        const { data: user } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', session.user.id)
-          .single()
         setSessionUser(session.user.id)
       }
     }

@@ -30,8 +30,9 @@ export const Header: FC = () => {
         opened={postFormOpened}
         onClose={() => setPostFormOpened(false)}
         title='New Post'
-        overlayOpacity={0.6}
-        overlayBlur={1.25}
+        transition='fade'
+        transitionDuration={300}
+        transitionTimingFunction='ease'
       >
         {session && <PostForm />}
       </Modal>
@@ -40,8 +41,9 @@ export const Header: FC = () => {
         opened={authOpened}
         onClose={() => setAuthOpened(false)}
         title='Login to your account'
-        overlayOpacity={0.6}
-        overlayBlur={1.25}
+        transition='fade'
+        transitionDuration={300}
+        transitionTimingFunction='ease'
       >
         <Auth />
       </Modal>
@@ -50,8 +52,9 @@ export const Header: FC = () => {
         opened={profileOpened}
         onClose={() => setProfileOpened(false)}
         title='Your profile'
-        overlayOpacity={0.6}
-        overlayBlur={1.25}
+        transition='fade'
+        transitionDuration={300}
+        transitionTimingFunction='ease'
       >
         {sessionUser && <Profile />}
       </Modal>
