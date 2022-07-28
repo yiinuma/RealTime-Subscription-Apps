@@ -7,8 +7,9 @@ import useStore from 'store'
 import { supabase } from 'utils/supabase'
 import { Auth } from 'components/specificPage/Auth'
 import { Profile } from 'components/specificPage/Profile'
-import { UserAvatar } from 'components/uiParts/UserAvatar'
 import { PostForm } from 'components/specificPage/PostForm'
+import { useQueryAvatar } from 'hooks/useQueryAvatar'
+import { useDownloadUrl } from 'hooks/useDownloadUrl'
 
 export const Header: FC = () => {
   const queryClient = useQueryClient()
@@ -22,6 +23,8 @@ export const Header: FC = () => {
   const setProfileOpened = useStore((state) => state.setProfileOpened)
   const postFormOpened = useStore((state) => state.postFormOpened)
   const setPostFormOpened = useStore((state) => state.setPostFormOpened)
+  const { data } = useQueryAvatar(session?.user?.id)
+  const { fullUrl: avatarUrl } = useDownloadUrl(data?.avatar_url, 'avatars')
 
   return (
     <header className='sticky top-0 z-50 bg-white'>
@@ -78,9 +81,9 @@ export const Header: FC = () => {
             </Button>
           )}
           <div className='flex items-center'>
-            {session && sessionUser && (
+            {session && (
               <ActionIcon className='ml-10' onClick={() => setProfileOpened(true)}>
-                <UserAvatar id={sessionUser} />
+                <Avatar src={avatarUrl} alt='Avatar' radius='lg' size='md' />
               </ActionIcon>
             )}
             {!session ? (
