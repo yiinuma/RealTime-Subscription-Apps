@@ -10,7 +10,7 @@ export const Footer: FC = () => {
           <div className='w-8'>
             <Image radius='xl' src='/logo.jpg' />
           </div>
-          <Text>Subscription Test Page</Text>
+          <Text>ImagePosting Test Page</Text>
         </Group>
         <ActionIcon<'a'>
           component='a'
